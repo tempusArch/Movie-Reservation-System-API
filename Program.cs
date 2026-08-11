@@ -41,8 +41,8 @@ builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile).Assembly);
 
 builder.Services.AddScoped<IHttpContextService, HttpContextService>();
 builder.Services.AddScoped<DbSeeder>();
-builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
-builder.Services.AddSingleton<IJwtService, JwtService>();
+builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();
+builder.Services.AddTransient<IJwtService, JwtService>();
 
 builder.Services.AddHostedService<ReservationStatusCompleteBackgroudJob>();
 
