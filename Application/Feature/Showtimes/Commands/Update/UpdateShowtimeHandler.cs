@@ -27,11 +27,11 @@ public class UpdateShowtimeHandler : IRequestHandler<UpdateShowtimeCommand, Show
         if (isExisted)
             throw new InvalidOperationException("StartTime already has a Showtime");
 
-        /*var theHall = await _context.HallTable
+        var theHall = await _context.HallTable
             .FirstOrDefaultAsync(x => x.Id == command.UpdateShowtimeDto.HallId, cancellationToken);
 
         if (theHall == null)
-            throw new NotFoundException("Hall not found");*/
+            throw new NotFoundException("Hall not found");
 
         var theMovie = await _context.MovieTable
             .AsNoTracking()
@@ -56,9 +56,8 @@ public class UpdateShowtimeHandler : IRequestHandler<UpdateShowtimeCommand, Show
                 theOne.EndTime > x.StartTime);
 
         if (hasOverlap)
-            throw new InvalidOperationException("Same hall overlapping showtime");
+            throw new InvalidOperationException("The Hall has overlapping showtime");
     
-
         await _context.SaveChangesAsync(cancellationToken);
 
         return theOne;
