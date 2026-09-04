@@ -16,6 +16,7 @@ public class GetOneMovieHandler : IRequestHandler<GetOneMovieQuery, ReadMovieDto
     public async Task<ReadMovieDto> Handle(GetOneMovieQuery query, CancellationToken cancellationToken) {
         var theOne = await _context.MovieTable
             .AsNoTracking()
+            .Where(x => x.Id == query.Id)
             .Select(x => new ReadMovieDto {
                 MovieId = x.Id,
                 Title = x.Title,

@@ -16,7 +16,7 @@ public class ChangeUserRoleHandler : IRequestHandler<ChangeUserRoleCommand, Unit
 
     public async Task<Unit> Handle(ChangeUserRoleCommand command, CancellationToken cancellationToken) {
         if (command.CurrentUserId == command.ChangeUserRoleDto.TargetUserId)
-            throw new InvalidOperationException("Can not change own role");
+            throw new InvalidOperationException("Can not change your own role");
 
         var theOne = await _context.UserTable
             .FirstOrDefaultAsync(x => x.Id == command.ChangeUserRoleDto.TargetUserId, cancellationToken);
