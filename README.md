@@ -1,4 +1,4 @@
-# Movie_Reservation_System_API
+# Movie-Reservation-System-API
 
 ## Tech Stack
 - C#
