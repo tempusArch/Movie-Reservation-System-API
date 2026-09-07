@@ -18,7 +18,7 @@ Clean Architecture + CQRS
 - Admin management for Genre, Movie, Hall, Seat, Showtime
 - Seat reservation and Showtime scheduling
 - Concurrency Handling (Database Constraint, unique composite index to prevent duplicate seat reservations)
-- MediatR Pipeline Behavior (FluentValidation, Logging, Transaction)
+- MediatR Pipeline Behavior (Logging, FluentValidation, Transaction)
 - Global ExceptionHandler
 - BackgroundService (Periodically Update Reservation Status)
 
