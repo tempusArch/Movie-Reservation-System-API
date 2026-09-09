@@ -31,13 +31,14 @@ public class CreateReservationHandler : IRequestHandler<CreateReservationCommand
         if (DateTime.UtcNow >= theShowtime.StartTime)
             throw new InvalidOperationException("Showtime already started");
 
-        var existingReservedSeatRisuto = await _context.ReservedSeatTable
-            .Where(rs =>
+        var ifExistingReservedSeat = await _context.ReservedSeatTable
+            .AnyAsync(rs =>
                 rs.ShowtimeId == command.CreateReservationDto.ShowtimeId &&
-                command.CreateReservationDto.SeatIdRisuto.Contains(rs.SeatId))
-            .ToListAsync(cancellationToken);
+                command.CreateReservationDto.SeatIdRisuto.Contains(rs.SeatId),
+                cancellationToken
+            );
 
-        if (existingReservedSeatRisuto.Any())
+        if (ifExistingReservedSeat)
             throw new InvalidOperationException("Seat unavailable");
 
         var newReservation = _mapper.Map<Reservation>(command.CreateReservationDto);
